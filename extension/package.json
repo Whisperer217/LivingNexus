@@ -1,0 +1,29 @@
+{
+  "name": "living-nexus-archive-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension for migrating files from cloud storage to local storage",
+  "scripts": {
+    "build": "tsc && vite build",
+    "watch": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "package": "npm run build && zip -r living-nexus-archive.zip manifest.json src/ public/ popup.html popup.js",
+    "dev": "vite"
+  },
+  "keywords": [
+    "chrome-extension",
+    "google-drive",
+    "onedrive",
+    "file-migration",
+    "data-sovereignty",
+    "privacy"
+  ],
+  "author": "Living Nexus Archive",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
+  }
+}
+

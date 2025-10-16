@@ -10,6 +10,7 @@ import type {
   ExtensionResponse, 
   MigrationSession, 
   MigrationTask,
+  MigrationStatus,
   CloudFile,
   CloudProvider
 } from '../types';
@@ -184,7 +185,8 @@ async function startMigrationProcess(session: MigrationSession, settings: any) {
   session.status = 'downloading';
 
   for (const task of session.tasks) {
-    if (session.status === 'paused' || session.status === 'error') {
+    // Check if migration should stop
+    if (session.status !== 'downloading') {
       break;
     }
 

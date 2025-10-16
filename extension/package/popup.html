@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Living Nexus Archive</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 380px;
+      min-height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      padding: 0;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .status-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .status-card h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #10b981;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .stat-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      color: #10b981;
+      border-bottom-color: #10b981;
+    }
+
+    .tab:hover {
+      color: #e2e8f0;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 32px 16px;
+      color: #64748b;
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .empty-state-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    .footer-link {
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: #10b981;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .conversation-item {
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .conversation-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .conversation-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .conversation-meta {
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .platform-badge {
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .platform-chatgpt { background: rgba(116, 169, 124, 0.2); color: #74a97c; }
+    .platform-claude { background: rgba(204, 143, 102, 0.2); color: #cc8f66; }
+    .platform-gemini { background: rgba(66, 133, 244, 0.2); color: #4285f4; }
+    .platform-perplexity { background: rgba(147, 51, 234, 0.2); color: #9333ea; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🗄️ Living Nexus Archive</h1>
+    <p>Your AI conversations, owned by you</p>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab active" data-tab="dashboard">Dashboard</button>
+      <button class="tab" data-tab="conversations">Conversations</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="dashboard" class="tab-content active">
+      <div class="status-card">
+        <h2>
+          <span class="status-indicator"></span>
+          AI Logger Active
+        </h2>
+        <div class="stat-row">
+          <span class="stat-label">Conversations Saved</span>
+          <span class="stat-value" id="total-conversations">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Words</span>
+          <span class="stat-value" id="total-words">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Storage Used</span>
+          <span class="stat-value" id="storage-used">0 KB</span>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <h2>Supported Platforms</h2>
+        <div class="stat-row">
+          <span class="stat-label">ChatGPT</span>
+          <span class="badge">Active</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Claude</span>
+          <span class="badge">Active</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Gemini</span>
+          <span class="badge">Active</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Perplexity</span>
+          <span class="badge">Active</span>
+        </div>
+      </div>
+
+      <button class="button button-primary" id="view-files">
+        📁 Open Saved Conversations
+      </button>
+      <button class="button button-secondary" id="export-all">
+        💾 Export All Data
+      </button>
+    </div>
+
+    <!-- Conversations Tab -->
+    <div id="conversations" class="tab-content">
+      <div id="conversations-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">💬</div>
+          <div class="empty-state-text">
+            No conversations yet.<br>
+            Visit ChatGPT, Claude, or Gemini to start logging!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings" class="tab-content">
+      <div class="status-card">
+        <h2>Auto-Save Settings</h2>
+        <div class="stat-row">
+          <span class="stat-label">Save to Downloads</span>
+          <input type="checkbox" id="auto-save" checked>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Auto-Tag Conversations</span>
+          <input type="checkbox" id="auto-tag" checked>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Show Notifications</span>
+          <input type="checkbox" id="notifications" checked>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <h2>Data Management</h2>
+        <button class="button button-secondary" id="clear-data">
+          🗑️ Clear All Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-links">
+      <a href="#" class="footer-link" id="help-link">Help</a>
+      <a href="#" class="footer-link" id="privacy-link">Privacy</a>
+      <a href="#" class="footer-link" id="github-link">GitHub</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

@@ -118,3 +118,23 @@ export interface ExtensionResponse {
   error?: string;
 }
 
+// AI Conversation Logger Types
+export type AIPlatform = 'ChatGPT' | 'Claude' | 'Gemini' | 'Perplexity';
+
+export interface AIMessage {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: number;
+}
+
+export interface AIConversation {
+  id: string;
+  platform: AIPlatform;
+  messages: AIMessage[];
+  title: string;
+  tags: string[];
+  timestamp: number;
+  wordCount: number;
+  metadata?: Record<string, any>;
+}
+

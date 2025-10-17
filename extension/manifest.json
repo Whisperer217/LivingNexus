@@ -33,6 +33,11 @@
       ],
       "js": ["src/content/ai-interceptor.js"],
       "run_at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/manual-scraper.js"],
+      "run_at": "document_idle"
     }
   ],
   "action": {

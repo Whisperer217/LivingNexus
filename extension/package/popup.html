@@ -12,8 +12,8 @@
     }
 
     body {
-      width: 380px;
-      min-height: 500px;
+      width: 420px;
+      min-height: 550px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #e2e8f0;
@@ -40,121 +40,87 @@
       font-weight: 500;
     }
 
-    .content {
-      padding: 20px;
-    }
-
-    .status-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .save-section {
+      background: rgba(16, 185, 129, 0.1);
+      border: 2px solid rgba(16, 185, 129, 0.3);
       border-radius: 12px;
       padding: 16px;
-      margin-bottom: 16px;
-      backdrop-filter: blur(10px);
+      margin: 16px;
     }
 
-    .status-card h2 {
-      font-size: 14px;
-      font-weight: 600;
-      color: #10b981;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .status-indicator {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .stat-row:last-child {
-      border-bottom: none;
-    }
-
-    .stat-label {
-      font-size: 13px;
-      color: #94a3b8;
-    }
-
-    .stat-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #e2e8f0;
-    }
-
-    .button {
+    .save-btn {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
       border: none;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
-      margin-bottom: 8px;
-    }
-
-    .button-primary {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
-    .button-primary:hover {
+    .save-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
     }
 
-    .button-secondary {
+    .save-btn:active {
+      transform: translateY(0);
+    }
+
+    .save-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .save-status {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      text-align: center;
       background: rgba(255, 255, 255, 0.05);
-      color: #e2e8f0;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .button-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .save-status.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #10b981;
     }
 
-    .button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .save-status.error {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #ef4444;
     }
 
     .tabs {
       display: flex;
       gap: 8px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px 16px 0 16px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     }
 
     .tab {
       flex: 1;
-      padding: 10px;
+      padding: 12px;
       background: transparent;
       border: none;
-      border-bottom: 2px solid transparent;
       color: #94a3b8;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
+      border-bottom: 3px solid transparent;
       transition: all 0.2s;
+    }
+
+    .tab:hover {
+      color: #e2e8f0;
     }
 
     .tab.active {
@@ -162,76 +128,79 @@
       border-bottom-color: #10b981;
     }
 
-    .tab:hover {
-      color: #e2e8f0;
-    }
-
     .tab-content {
       display: none;
+      padding: 16px;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 32px 16px;
-      color: #64748b;
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
-    .empty-state-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-
-    .empty-state-text {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .footer {
-      padding: 16px 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
       text-align: center;
     }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      font-size: 12px;
-    }
-
-    .footer-link {
-      color: #64748b;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-link:hover {
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
       color: #10b981;
+      margin-bottom: 4px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 4px;
+    .stat-label {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .platform-status {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .platform {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 12px;
       font-size: 11px;
       font-weight: 600;
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.2);
       color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.2);
     }
 
     .conversation-item {
+      display: flex;
+      gap: 12px;
       padding: 12px;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       margin-bottom: 8px;
-      cursor: pointer;
       transition: all 0.2s;
-      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .conversation-item:hover {
@@ -239,35 +208,104 @@
       border-color: rgba(16, 185, 129, 0.3);
     }
 
-    .conversation-title {
-      font-size: 13px;
+    .download-btn {
+      padding: 8px 16px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 6px;
+      font-size: 12px;
       font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .conversation-meta {
-      font-size: 11px;
-      color: #64748b;
+    .download-btn:hover {
+      background: rgba(16, 185, 129, 0.3);
+    }
+
+    .setting-item {
       display: flex;
-      gap: 8px;
+      justify-content: space-between;
       align-items: center;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
 
-    .platform-badge {
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 10px;
+    .setting-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 24px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: 0.3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #10b981;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    .danger-btn {
+      width: 100%;
+      padding: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      font-size: 14px;
       font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .platform-chatgpt { background: rgba(116, 169, 124, 0.2); color: #74a97c; }
-    .platform-claude { background: rgba(204, 143, 102, 0.2); color: #cc8f66; }
-    .platform-gemini { background: rgba(66, 133, 244, 0.2); color: #4285f4; }
-    .platform-perplexity { background: rgba(147, 51, 234, 0.2); color: #9333ea; }
+    .danger-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    #conversations-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
@@ -276,111 +314,90 @@
     <p>Your AI conversations, owned by you</p>
   </div>
 
-  <div class="content">
-    <div class="tabs">
-      <button class="tab active" data-tab="dashboard">Dashboard</button>
-      <button class="tab" data-tab="conversations">Conversations</button>
-      <button class="tab" data-tab="settings">Settings</button>
-    </div>
+  <!-- Manual Save Section -->
+  <div class="save-section">
+    <button id="save-current-btn" class="save-btn">💾 Save Current Conversation</button>
+    <div id="save-status"></div>
+  </div>
 
-    <!-- Dashboard Tab -->
-    <div id="dashboard" class="tab-content active">
-      <div class="status-card">
-        <h2>
-          <span class="status-indicator"></span>
-          AI Logger Active
-        </h2>
-        <div class="stat-row">
-          <span class="stat-label">Conversations Saved</span>
-          <span class="stat-value" id="total-conversations">0</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Total Words</span>
-          <span class="stat-value" id="total-words">0</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Storage Used</span>
-          <span class="stat-value" id="storage-used">0 KB</span>
-        </div>
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-tab="dashboard">Dashboard</button>
+    <button class="tab" data-tab="conversations">Conversations</button>
+    <button class="tab" data-tab="settings">Settings</button>
+  </div>
+
+  <!-- Dashboard Tab -->
+  <div id="dashboard-tab" class="tab-content active">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="conversation-count">0</div>
+        <div class="stat-label">Conversations</div>
       </div>
-
-      <div class="status-card">
-        <h2>Supported Platforms</h2>
-        <div class="stat-row">
-          <span class="stat-label">ChatGPT</span>
-          <span class="badge">Active</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Claude</span>
-          <span class="badge">Active</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Gemini</span>
-          <span class="badge">Active</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Perplexity</span>
-          <span class="badge">Active</span>
-        </div>
+      <div class="stat-card">
+        <div class="stat-value" id="total-words">0</div>
+        <div class="stat-label">Total Words</div>
       </div>
-
-      <button class="button button-primary" id="view-files">
-        📁 Open Saved Conversations
-      </button>
-      <button class="button button-secondary" id="export-all">
-        💾 Export All Data
-      </button>
-    </div>
-
-    <!-- Conversations Tab -->
-    <div id="conversations" class="tab-content">
-      <div id="conversations-list">
-        <div class="empty-state">
-          <div class="empty-state-icon">💬</div>
-          <div class="empty-state-text">
-            No conversations yet.<br>
-            Visit ChatGPT, Claude, or Gemini to start logging!
-          </div>
-        </div>
+      <div class="stat-card">
+        <div class="stat-value" id="storage-used">0 KB</div>
+        <div class="stat-label">Storage</div>
       </div>
     </div>
 
-    <!-- Settings Tab -->
-    <div id="settings" class="tab-content">
-      <div class="status-card">
-        <h2>Auto-Save Settings</h2>
-        <div class="stat-row">
-          <span class="stat-label">Save to Downloads</span>
-          <input type="checkbox" id="auto-save" checked>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Auto-Tag Conversations</span>
-          <input type="checkbox" id="auto-tag" checked>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Show Notifications</span>
-          <input type="checkbox" id="notifications" checked>
-        </div>
+    <h3 style="margin-bottom: 12px; font-size: 14px; color: #10b981;">Supported Platforms</h3>
+    <div class="platform-status">
+      <div class="platform">
+        <span>ChatGPT</span>
+        <span class="status-badge">Active</span>
       </div>
-
-      <div class="status-card">
-        <h2>Data Management</h2>
-        <button class="button button-secondary" id="clear-data">
-          🗑️ Clear All Data
-        </button>
+      <div class="platform">
+        <span>Claude</span>
+        <span class="status-badge">Active</span>
+      </div>
+      <div class="platform">
+        <span>Gemini</span>
+        <span class="status-badge">Active</span>
+      </div>
+      <div class="platform">
+        <span>Perplexity</span>
+        <span class="status-badge">Active</span>
       </div>
     </div>
   </div>
 
-  <div class="footer">
-    <div class="footer-links">
-      <a href="#" class="footer-link" id="help-link">Help</a>
-      <a href="#" class="footer-link" id="privacy-link">Privacy</a>
-      <a href="#" class="footer-link" id="github-link">GitHub</a>
+  <!-- Conversations Tab -->
+  <div id="conversations-tab" class="tab-content">
+    <div id="conversations-list"></div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div id="settings-tab" class="tab-content">
+    <div class="setting-item">
+      <div class="setting-label">Auto-Save Conversations</div>
+      <label class="toggle">
+        <input type="checkbox" id="auto-save" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="setting-item">
+      <div class="setting-label">Auto-Tag Content</div>
+      <label class="toggle">
+        <input type="checkbox" id="auto-tag" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="setting-item">
+      <div class="setting-label">Show Notifications</div>
+      <label class="toggle">
+        <input type="checkbox" id="show-notifications" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div style="margin-top: 20px;">
+      <button id="clear-data" class="danger-btn">🗑️ Clear All Data</button>
     </div>
   </div>
 
-  <script src="popup.js"></script>
+  <script src="popup-enhanced.js"></script>
 </body>
 </html>
-

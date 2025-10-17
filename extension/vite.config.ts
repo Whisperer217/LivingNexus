@@ -8,7 +8,7 @@ export default defineConfig({
       input: {
         'service-worker': resolve(__dirname, 'src/background/service-worker.ts'),
         'ai-interceptor': resolve(__dirname, 'src/content/ai-interceptor.ts'),
-        'ai-conversation-logger': resolve(__dirname, 'src/loggers/ai-conversation-logger.ts'),
+        'manual-scraper': resolve(__dirname, 'src/content/manual-scraper.ts'),
       },
       output: {
         entryFileNames: (chunkInfo) => {
@@ -19,19 +19,24 @@ export default defineConfig({
           if (chunkInfo.name === 'ai-interceptor') {
             return 'src/content/[name].js';
           }
-          if (chunkInfo.name === 'ai-conversation-logger') {
-            return 'src/loggers/[name].js';
+          if (chunkInfo.name === 'manual-scraper') {
+            return 'src/content/[name].js';
           }
           return 'src/[name].js';
         },
-        chunkFileNames: 'chunks/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash][extname]',
+        // Inline all dependencies - no code splitting
+        inlineDynamicImports: false,
+        manualChunks: undefined,
       },
     },
     // Don't minify for easier debugging
     minify: false,
     // Generate source maps
     sourcemap: true,
+    // Inline all dependencies
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
   },
   resolve: {
     alias: {
